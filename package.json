@@ -1,17 +1,15 @@
 {
-  "name": "react",
+  "name": "react-assessment-yk8l3",
   "version": "1.0.0",
-  "description": "React example starter project",
-  "keywords": [
-    "react",
-    "starter"
-  ],
+  "description": "",
+  "keywords": [],
   "main": "src/index.js",
   "dependencies": {
     "@emotion/core": "10.0.27",
     "@emotion/styled": "10.0.27",
     "color": "3.1.2",
     "d3": "5.15.0",
+    "emotion": "10.0.27",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-scripts": "3.0.1"

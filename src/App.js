@@ -1,6 +1,7 @@
 import React from "react";
+import { Global } from "@emotion/core";
+import globalStyles from "./globalStyles";
 
-import "./styles.css";
 import CandidatesChart from "./CandidatesChart";
 
 const currentWeek = [
@@ -41,17 +42,10 @@ const previousWeek = [
   }
 ];
 
-export default class App extends React.Component {
-  state = {
-    message: "hello world"
-  };
-  updateMessage = value => {
-    this.setState({
-      message: value
-    });
-  };
-  render() {
-    return (
+export default function App() {
+  return (
+    <React.Fragment>
+      <Global styles={globalStyles} />
       <main className="App">
         <h1>Candidates</h1>
         <section>
@@ -62,6 +56,6 @@ export default class App extends React.Component {
           />
         </section>
       </main>
-    );
-  }
+    </React.Fragment>
+  );
 }
