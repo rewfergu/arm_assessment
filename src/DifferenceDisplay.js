@@ -9,7 +9,6 @@ class DifferenceDisplay extends React.PureComponent {
     listItems: []
   };
   componentDidMount() {
-    console.log("rendering difference");
     const { currentWeek, previousWeek } = this.props;
     const listItems = currentWeek.map((category, index) => {
       const diff =

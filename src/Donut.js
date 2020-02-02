@@ -43,6 +43,7 @@ class Donut extends React.Component {
       .attr("height", height)
       .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+      .attr("class", "donut")
       .style("filter", "url(#drop-shadow)");
 
     const defs = svg.append("defs");
@@ -59,15 +60,16 @@ class Donut extends React.Component {
       .attr("stdDeviation", 15)
       .attr("flood-opacity", 0.3);
 
-    // Compute the position of each group on the pie:
-    var pie = d3.pie().value(function(d) {
-      return d.value.value;
-    });
-    var data_ready = pie(d3.entries(currentWeek));
+    var pie = d3
+      .pie()
+      .sort(null)
+      .value(function(d) {
+        return d.value.value;
+      });
 
     const segments = svg
-      .selectAll("whatever")
-      .data(data_ready)
+      .selectAll(".donut")
+      .data(pie(d3.entries(currentWeek)))
       .enter()
       .append("g")
       .attr("class", "segmentGroup")
@@ -82,17 +84,40 @@ class Donut extends React.Component {
         this.deactivateElement(createSegmentClass(d.data.value.name))
       );
 
+    // segments
+    //   .append("path")
+    //   .attr(
+    //     "d",
+    //     d3
+    //       .arc()
+    //       .innerRadius(140)
+    //       .outerRadius(radius)
+    //   )
+    //   .attr("fill", function(d) {
+    //     return colors[d.data.value.name];
+    //   });
+
+    const arc = d3
+      .arc()
+      .innerRadius(140)
+      .outerRadius(radius);
+
     segments
       .append("path")
-      .attr(
-        "d",
-        d3
-          .arc()
-          .innerRadius(140)
-          .outerRadius(radius)
-      )
       .attr("fill", function(d) {
         return colors[d.data.value.name];
+      })
+      .transition()
+      .delay(function(d, i) {
+        return i * 500;
+      })
+      .duration(500)
+      .attrTween("d", function(d) {
+        var i = d3.interpolate(d.startAngle, d.endAngle);
+        return function(t) {
+          d.endAngle = i(t);
+          return arc(d);
+        };
       });
 
     segments
@@ -111,6 +136,12 @@ class Donut extends React.Component {
       })
       .attr("dy", ".35em")
       .style("text-anchor", "middle")
+      .transition()
+      .delay(function(d, i) {
+        return i * 500;
+      })
+      .duration(500)
+      .attrTween("opacity", () => d3.interpolate(0, 1))
       .text(function(d, i) {
         return `${((d.value / currentWeekTotal) * 100).toFixed()}%`;
       });

@@ -53,9 +53,8 @@ export default class App extends React.Component {
   render() {
     return (
       <main className="App">
-        <h1>Hello CodeSandbox</h1>
+        <h1>Candidates</h1>
         <section>
-          <h2>Candidates</h2>
           <CandidatesChart
             currentWeek={currentWeek}
             previousWeek={previousWeek}
