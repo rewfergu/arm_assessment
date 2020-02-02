@@ -26,15 +26,11 @@ class DifferenceDisplay extends React.PureComponent {
 
       const formattedValue = Math.abs(diff * 100).toFixed(1);
 
-      return (
-        <DisplayItem
-          key={`${category.name}-diff`}
-          category={category.name}
-          type={type}
-        >
-          {formattedValue} %
-        </DisplayItem>
-      );
+      return {
+        name: category.name,
+        value: formattedValue,
+        type
+      };
     });
 
     this.setState({
@@ -45,7 +41,19 @@ class DifferenceDisplay extends React.PureComponent {
   render() {
     return (
       <Container {...this.props}>
-        <DisplayList>{this.state.listItems}</DisplayList>
+        <DisplayList>
+          {this.state.listItems.map((item, index) => (
+            <DisplayItem
+              key={`${item.name}-diff`}
+              index={index}
+              category={item.name}
+              type={item.type}
+              className={this.props.active === item.name ? "active" : ""}
+            >
+              {item.value} %
+            </DisplayItem>
+          ))}
+        </DisplayList>
       </Container>
     );
   }
@@ -73,17 +81,8 @@ const DisplayList = styled.ul`
 
 const DisplayItem = props => {
   return (
-    <li
-      style={{
-        marginBottom: "10px"
-      }}
-    >
-      <span
-        style={{
-          display: "inline-block",
-          marginRight: "10px"
-        }}
-      >
+    <StyledDisplayItem {...props}>
+      <span>
         <DifferenceIcon
           type={props.type}
           category={props.category}
@@ -91,8 +90,38 @@ const DisplayItem = props => {
         />
       </span>
       {props.children}
-    </li>
+    </StyledDisplayItem>
   );
 };
+
+const StyledDisplayItem = styled.li`
+  padding: 10px 25px 5px;
+  border-radius: 4px;
+  transition: background-color 0.23s;
+  opacity: 0;
+  animation-name: fadein;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: ${props => 1000 + 200 * props.index}ms;
+
+  &.active {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  span {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+`;
 
 export default DifferenceDisplay;

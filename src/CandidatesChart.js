@@ -36,6 +36,7 @@ class CandidatesChart extends React.Component {
             currentWeek={this.props.currentWeek}
             previousWeek={this.props.previousWeek}
             width={this.props.width}
+            active={this.state.active}
           />
         </Chart>
         <Legend active={this.state.active} />
