@@ -10,14 +10,14 @@ To run this project:
 
 My solution consists of 3 main parts:
 
-1. The actual donut itself, written in d3 with svg output
+1. The actual donut itself, written in D3 with svg output
 2. The legend at the bottom
 3. The stats inside the donut ring
 
 ## Why D3 / SVG
-I could have built the entire thing as one big D3 script, but D3 and React fight over control of the DOM, and because this is a react assessment I felt like it was a better demonstration of my React skills to break things apart. 
+I could have built the entire thing as one big D3 script, but D3 and React fight over control of the DOM, and because this is a React assessment I felt like it was a better demonstration of my React skills to break things apart. 
 
-[D3](https://d3js.org/) is one of the most (if not the most) powerful and flexible libraries for data visualization, but some care does need to be taken so that the library can share access to the DOM without conflicts. For my solution I isolated D3 code inside its own component, and created a ref to the container inside the render function.  Using this ref D3 can inject its svg inside without issue.  I also set `shouldComponentUpdate` to return `false` so that react would ignore changes and let d3 manage it.
+[D3](https://d3js.org/) is one of the most (if not the most) powerful and flexible libraries for data visualization, but some care does need to be taken so that the library can share access to the DOM without conflicts. For my solution I isolated D3 code inside its own component, and created a ref to the container inside the render function.  Using this ref D3 can inject its svg inside without issue.  I also set `shouldComponentUpdate` to return `false` so that react would ignore changes and let D3 manage it.
 
 I also chose to output SVG code because of the accessibility and usability benefits its provides. SVG is injected as DOM elements, so they are accessible like any other tag inside the document.  Text inside a canvas element is similar to text inside an image, and doesn’t provide the same level of access to screen readers and keyboard users.  This also gives us an advantage when styling elements since CSS can access that information with normal selectors.  
 
