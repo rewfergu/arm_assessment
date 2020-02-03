@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "@emotion/styled";
-// import { colors } from "./util";
 
 import DifferenceIcon from "./DifferenceIcon";
 
@@ -102,7 +101,7 @@ const StyledDisplayItem = styled.li`
   animation-name: fadein;
   animation-duration: 1s;
   animation-fill-mode: forwards;
-  animation-delay: ${props => 1000 + 200 * props.index}ms;
+  animation-delay: ${props => 2000 + 200 * props.index}ms;
 
   &.active {
     background: rgba(0, 0, 0, 0.05);

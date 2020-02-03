@@ -9,6 +9,7 @@ function createSegmentClass(name) {
 
 class Donut extends React.Component {
   donut = React.createRef();
+
   activateElement = (d, name) => {
     const activeEl = d3.select(`.${name}`);
     activeEl.classed("active", true);
@@ -32,10 +33,8 @@ class Donut extends React.Component {
       0
     );
 
-    // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     const radius = Math.min(width, height) / 2 - margin;
 
-    // append the svg object to the div called 'my_dataviz'
     const svg = d3
       .select(this.donut.current)
       .append("svg")
@@ -46,14 +45,12 @@ class Donut extends React.Component {
       .attr("class", "donut")
       .style("filter", "url(#drop-shadow)");
 
-    const defs = svg.append("defs");
-
-    const filter = defs
+    // create the filter for the drop shadow around the ring
+    svg
+      .append("defs")
       .append("filter")
       .attr("id", "drop-shadow")
-      .attr("height", "130%");
-
-    filter
+      .attr("height", "130%")
       .append("feDropShadow")
       .attr("dx", 0)
       .attr("dy", 0)
@@ -83,19 +80,6 @@ class Donut extends React.Component {
       .on("mouseout", d =>
         this.deactivateElement(createSegmentClass(d.data.value.name))
       );
-
-    // segments
-    //   .append("path")
-    //   .attr(
-    //     "d",
-    //     d3
-    //       .arc()
-    //       .innerRadius(140)
-    //       .outerRadius(radius)
-    //   )
-    //   .attr("fill", function(d) {
-    //     return colors[d.data.value.name];
-    //   });
 
     const arc = d3
       .arc()

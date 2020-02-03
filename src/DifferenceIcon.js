@@ -3,7 +3,7 @@ import Color from "color";
 import { colors } from "./util";
 
 const DifferenceIcon = props => {
-  if (props.type === "positive") return <Positive {...props} />;
+  if (props.type === "positive") return <Positive category={props.category} />;
   if (props.type === "negative") return <Negative category={props.category} />;
   if (props.type === "neutral") return <Neutral category={props.category} />;
 };

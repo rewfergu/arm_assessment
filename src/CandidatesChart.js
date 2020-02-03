@@ -6,6 +6,8 @@ import Donut from "./Donut";
 import DifferenceDisplay from "./DifferenceDisplay";
 
 class CandidatesChart extends React.Component {
+  // we set the state to keep track of connections between the components
+  // I'm sharing the mouseOver event from the donut
   state = {
     active: ""
   };

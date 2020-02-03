@@ -5,7 +5,7 @@ import { colors } from "./util";
 
 const Legend = props => {
   return (
-    <Container>
+    <div>
       <List>
         <StyledListItem
           type="New"
@@ -24,13 +24,9 @@ const Legend = props => {
           className={props.active === "Assignment" ? "active" : ""}
         />
       </List>
-    </Container>
+    </div>
   );
 };
-
-const ListItem = props => <li {...props}>{props.type}</li>;
-
-const Container = styled.div``;
 
 const List = styled.ul`
   list-style: none;
@@ -46,6 +42,8 @@ const List = styled.ul`
     border-bottom: 3px solid transparent;
   }
 `;
+
+const ListItem = props => <li {...props}>{props.type}</li>;
 
 const StyledListItem = styled(ListItem)`
   &:before {
