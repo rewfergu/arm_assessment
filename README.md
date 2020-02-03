@@ -37,5 +37,8 @@ For the most part I did try to mimic the styles in the pdf as closely as I could
 ## What I Would Do to Take It Further
 If I was to spend more time and improve the component further, I would add more accessibility features for low vision and keyboard users.  I set myself up well starting with D3 and SVG, but there is still more to do in terms of using labels for screen readers and tooltips to describe areas further. 
 
-I also didn’t add any unit tests in Jest, and before production use of the component those would be a good idea to add also.
+I didn’t add any unit tests in Jest, and before production use of the component those would be a good idea to add also.
+
+For prototyping purposes the animations work on Safari, Firefox and Chrome on my system, but I didn’t evaluate the performance and if there were performance issues on slower browsers they might need to be adjusted.
+
 
